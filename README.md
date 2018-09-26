@@ -11,7 +11,7 @@ Link to description of the course project https://www.coursera.org/learn/data-cl
 
 2. Set working directory (setwd) as "your_path\UCI HAR Dataset" based on directory where you unzip the file from step1.
 
-3. Use read.table() to load data from the files:
+3. Use read.table() to load data from the files:  
   ```train <- read.table("train/X_train.txt")```  
   ```test <- read.table("test/X_test.txt")```  
   ```train_subject <- read.table("train/subject_train.txt", col.names = "subject")```  
@@ -37,17 +37,17 @@ Link to description of the course project https://www.coursera.org/learn/data-cl
 8. Withing join from plyr package replace the numbers of activities in tidydata set with their names from activity_name data based on "activity_num" variable. Delete "activity_num" after that within select.  
   ```tidydata <- join(tidydata, activity_name, by = "activity_num") %>% select(-activity_num)```  
 
-9. Transform tidydata to tibble format to get more visible results in R console.
+9. Transform tidydata to tibble format to get more visible results in R console.  
   ```tbl_df(tidydata)```  
   
-10. Regroup order of columns within select.
+10. Regroup order of columns within select.  
   ```tidydata <- tidydata %>% select(subject, activity_name, 1:66)```  
   
-11. Make labels of tidydata set more readable with descriptive variable names using gsub() here is code example for "Acc":
+11. Make labels of tidydata set more readable with descriptive variable names using gsub() here is code example for "Acc":  
   ```names(tidydata) <- gsub("Acc", "Accelerometer", names(tidydata))```  
   
-12. Create summary data set using group_by and summarise_each with funs = mean.
+12. Create summary data set using group_by and summarise_each with funs = mean.  
   ```summary_tidydata <- tidydata %>% group_by(subject, activity_name) %>% summarise_each(funs(mean))```  
 
-13. Write txt file with write.table (row.names = FALSE) 
+13. Write txt file with write.table (row.names = FALSE)  
   ```write.table(summary_tidydata, file="tidy_data.txt", row.names = FALSE)```  
